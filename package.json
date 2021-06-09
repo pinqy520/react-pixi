@@ -3,8 +3,7 @@
   "version": "6.5.4",
   "description": "Write PixiJS applications using React declarative style.",
   "main": "index.js",
-  "umd:main": "umd.js",
-  "module": "module.js",
+  "module": "index.js",
   "jsnext:main": "module.js",
   "author": "Patrick Brouwer",
   "license": "MIT",
@@ -24,14 +23,12 @@
     "test:watch": "jest --silent --watch"
   },
   "files": [
-    "dist/",
-    "animated/",
-    "legacy/",
+    "src/",
     "LICENSE",
     "index.d.ts",
     "index.js",
-    "umd.js",
-    "module.js"
+    "animated.js",
+    "animated.d.ts"
   ],
   "typings": "./index.d.ts",
   "devDependencies": {
