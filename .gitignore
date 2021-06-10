@@ -1,9 +1,3 @@
 node_modules/
-lib/
-animated/react-pixi*
-legacy/react-pixi*
-examples/
-.docz/
 .yarn-error.log
-docs/
 package-lock.json

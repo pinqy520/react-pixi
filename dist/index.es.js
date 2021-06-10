@@ -1785,4 +1785,4 @@ var SimpleMesh = TYPES.SimpleMesh;
 var SimpleRope = TYPES.SimpleRope;
 
 export { animated as Animated, AnimatedSprite, AppConsumer, Context as AppContext, AppProvider, BitmapText, Container, Graphics, NineSlicePlane, ParticleContainer, PixiComponent, PixiFiber, SimpleMesh, SimpleRope, Sprite, Stage, Text, TilingSprite, applyDefaultProps, eventHandlers, render, unmountComponentAtNode, useApp, useTick, withFilters, withPixiApp };
-//# sourceMappingURL=index.es.map
+//# sourceMappingURL=index.es.js.map

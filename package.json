@@ -3,7 +3,7 @@
   "version": "6.5.4",
   "description": "Write PixiJS applications using React declarative style.",
   "main": "dist/index.js",
-  "module": "dist/index.es",
+  "module": "dist/index.es.js",
   "jsnext:main": "dist/module.es",
   "author": "Patrick Brouwer",
   "license": "MIT",
