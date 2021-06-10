@@ -23,6 +23,7 @@
     "test:watch": "jest --silent --watch"
   },
   "files": [
+    "dist/",
     "src/",
     "LICENSE",
     "index.d.ts",
