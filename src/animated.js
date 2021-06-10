@@ -1,8 +1,6 @@
 import { animated } from './react-spring'
 import { TYPES } from './utils/element'
 
-export * from './exports'
-
 export const BitmapText = animated[TYPES.BitmapText]
 export const Container = animated[TYPES.Container]
 export const Graphics = animated[TYPES.Graphics]

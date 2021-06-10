@@ -1,9 +1,5 @@
 import * as PIXI from 'pixi.js';
 import * as React from 'react';
-import { ElementType, ComponentPropsWithRef } from '@react-spring/types';
-import { AnimatedProps } from 'react-spring';
-
-type AnimatedComponent<T extends ElementType> = React.ForwardRefExoticComponent<AnimatedProps<ComponentPropsWithRef<T>>>;
 
 // Reconciler API
 interface Reconciler<Instance, TextInstance, Container, PublicInstance> {
@@ -341,17 +337,17 @@ declare namespace _ReactPixi {
 }
 
 // components
-export const Text: AnimatedComponent<React.FC<_ReactPixi.IText>>;
-export const Sprite: AnimatedComponent<React.FC<_ReactPixi.ISprite>>;
-export const Container: AnimatedComponent<React.FC<_ReactPixi.IContainer>>;
-export const Graphics: AnimatedComponent<React.FC<_ReactPixi.IGraphics>>;
-export const BitmapText: AnimatedComponent<React.FC<_ReactPixi.IBitmapText>>;
-export const NineSlicePlane: AnimatedComponent<React.FC<_ReactPixi.INineSlicePlane>>;
-export const ParticleContainer: AnimatedComponent<React.FC<_ReactPixi.IParticleContainer>>;
-export const TilingSprite: AnimatedComponent<React.FC<_ReactPixi.ITilingSprite>>;
-export const SimpleRope: AnimatedComponent<React.FC<_ReactPixi.ISimpleRope>>;
-export const SimpleMesh: AnimatedComponent<React.FC<_ReactPixi.ISimpleMesh>>;
-export const AnimatedSprite: AnimatedComponent<React.FC<_ReactPixi.IAnimatedSprite>>;
+export const Text: React.FC<_ReactPixi.IText>;
+export const Sprite: React.FC<_ReactPixi.ISprite>;
+export const Container: React.FC<_ReactPixi.IContainer>;
+export const Graphics: React.FC<_ReactPixi.IGraphics>;
+export const BitmapText: React.FC<_ReactPixi.IBitmapText>;
+export const NineSlicePlane: React.FC<_ReactPixi.INineSlicePlane>;
+export const ParticleContainer: React.FC<_ReactPixi.IParticleContainer>;
+export const TilingSprite: React.FC<_ReactPixi.ITilingSprite>;
+export const SimpleRope: React.FC<_ReactPixi.ISimpleRope>;
+export const SimpleMesh: React.FC<_ReactPixi.ISimpleMesh>;
+export const AnimatedSprite: React.FC<_ReactPixi.IAnimatedSprite>;
 
 // renderer
 export const render: (
@@ -359,6 +355,9 @@ export const render: (
   container: PIXI.Container,
   callback?: (...args: any) => void
 ) => any;
+
+// unmount component
+export const unmountComponentAtNode: (container: PIXI.Container) => void;
 
 // context
 export const AppContext: React.Context<PIXI.Application>;
@@ -395,7 +394,7 @@ export class Stage extends React.Component<_ReactPixi.IStage> {}
 export const PixiComponent: <Props, PixiInstance extends PIXI.DisplayObject>(
   componentName: string,
   lifecycle: _ReactPixi.ICustomComponent<Props, PixiInstance>
-) => AnimatedComponent<React.FC<Props & { ref?: React.Ref<PixiInstance> }>>;
+) => React.FC<Props & { ref?: React.Ref<PixiInstance> }>;
 
 /**
  * Tap into the {PIXI.Application} ticker raf.
@@ -442,7 +441,7 @@ export const useApp: () => PIXI.Application;
  */
 export const withPixiApp: <P extends { app: PIXI.Application }>(
   WrappedComponent: React.ComponentType<P>
-) => AnimatedComponent<React.ComponentClass<Omit<P, 'app'>>>;
+) => React.ComponentClass<Omit<P, 'app'>>;
 
 /**
  * Apply default props. Useful in Custom Components.
@@ -486,15 +485,19 @@ export const applyDefaultProps: <P extends object>(
 export const withFilters: <
   Component extends React.ComponentType<
     _ReactPixi.Container<PIXI.DisplayObject, any>
-    >,
+  >,
   Filters extends { [filterKey: string]: any }
-  >(
+>(
   WrapperComponent: Component,
   filters: Filters
-) => AnimatedComponent<React.ComponentType<
-  React.ComponentProps<Component> & Partial<
-    { [P in keyof Filters]: Partial<InstanceType<Filters[P]> & { construct: ConstructorParameters<Filters[P]> }> }>
-  >>;
+) => React.ComponentType<
+  React.ComponentProps<Component> &
+    Partial<
+      {
+        [P in keyof Filters]: Partial<InstanceType<Filters[P]> & { construct: ConstructorParameters<Filters[P]> }>
+      }
+    >
+>
 
 /**
  * Get the component instance ref
