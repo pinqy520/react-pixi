@@ -31,14 +31,17 @@ function removeChild(parent, child) {
   }
 
   // unmount potential children
-  if (child.children?.length) {
+  if (child?.config?.destroyChildren !== false && child.children?.length) {
     ;[...child.children].forEach(c => {
       removeChild(child, c)
     })
   }
 
   parent.removeChild(child)
-  child.destroy()
+
+  if (child?.config?.destroy !== false) {
+    child.destroy()
+  }
 }
 
 function insertBefore(parent, child, beforeChild) {
