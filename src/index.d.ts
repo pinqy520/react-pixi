@@ -333,6 +333,23 @@ declare namespace _ReactPixi {
       oldProps: Readonly<P>,
       newProps: Readonly<P>
     ): void;
+
+    /**
+     * Reconcile config
+     */
+    config?: {
+      /**
+       * Destroy instance on unmount?
+       * @default true
+       */
+      destroy?: boolean;
+
+      /**
+       * Destroy child instances?
+       * @default true
+       */
+      destroyChildren?: boolean
+    };
   }
 }
 
