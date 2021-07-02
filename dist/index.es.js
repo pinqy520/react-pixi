@@ -998,6 +998,7 @@ function createElement(type) {
       instance.didMount = injected.didMount ? injected.didMount.bind(instance) : undefined;
       instance.willUnmount = injected.willUnmount ? injected.willUnmount.bind(instance) : undefined;
       instance.applyProps = injected.applyProps ? injected.applyProps.bind(instance) : undefined;
+      instance.config = injected.config;
     }
   } // apply initial props!
 
@@ -1078,14 +1079,14 @@ function _appendChild(parent, child) {
 }
 
 function _removeChild(parent, child) {
-  var _child$children;
+  var _child$config, _child$children, _child$config2;
 
   if (typeof child.willUnmount === 'function') {
     child.willUnmount.call(child, child, parent);
   } // unmount potential children
 
 
-  if ((_child$children = child.children) !== null && _child$children !== void 0 && _child$children.length) {
+  if ((child === null || child === void 0 ? void 0 : (_child$config = child.config) === null || _child$config === void 0 ? void 0 : _child$config.destroyChildren) !== false && (_child$children = child.children) !== null && _child$children !== void 0 && _child$children.length) {
 
     _toConsumableArray(child.children).forEach(function (c) {
       _removeChild(child, c);
@@ -1093,7 +1094,10 @@ function _removeChild(parent, child) {
   }
 
   parent.removeChild(child);
-  child.destroy();
+
+  if ((child === null || child === void 0 ? void 0 : (_child$config2 = child.config) === null || _child$config2 === void 0 ? void 0 : _child$config2.destroy) !== false) {
+    child.destroy();
+  }
 }
 
 function insertBefore(parent, child, beforeChild) {
